@@ -1,0 +1,8 @@
+semantic_models:
+  - name: patient_appt_data
+    model: ref('fct_patient_appointment')
+    description: "This model is used for all the appointments including On-Site and Virtual"
+    primary_entity: patient_id
+
+    defaults: 
+      agg_time_dimension: start_date 

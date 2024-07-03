@@ -1,0 +1,13 @@
+version: 2 
+
+sources: 
+  - name: semantics
+    database: hc_semantics
+    schema: hc_raw
+    tables:
+      - name: patient_data
+      - name: appt_data
+      - name: usage_data
+      - name: interactions_data
+      - name: finance_data
+      - name: churn_data
