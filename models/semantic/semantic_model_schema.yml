@@ -1,0 +1,77 @@
+semantic_models:
+#-------------------------#
+# Semantic for Fact table #
+#-------------------------#
+  - name: patient_appt
+    model: ref('fct_patient')
+    description: "This table is used for all Appointment reporting related process."
+    primary_entity: patient_appt_primary_key #Required. 
+
+    defaults:
+      agg_time_dimension: appointment_date
+
+    entities: 
+      #- name: patient_appt_primary_key
+      #  type: primary
+      #  description: Required
+      #  expr: patient_appt_primary_key
+
+      - name: appt_id # Unique identifier for the appointment
+        type: foreign
+        expr: appointment_id 
+
+      - name: date
+        type: foreign
+        expr: date_key #Created during transfromation after ingestion. 
+
+    dimensions: 
+      - name: appointment_date
+        type: time
+        label: "Date of Appointment"
+        type_params:
+          time_granularity: day
+
+    measures:
+      - name: total_count_patient
+        label: "Total Count of Patients"
+        description: "Count of total patients including churn patients."
+        agg: count_distinct
+        expr: patient_id
+        
+      - name: total_churn_patient
+        label: "Total count of patients that left."
+        description: "Count of patients that churned."
+        agg: count  # Ensure 'agg' is provided
+        expr: case when churn = 'Yes' then patient_id else null end
+ 
+#-------------------------#
+# Semantic for date table #
+#-------------------------#
+  - name: date
+    model: ref('dim_date_appt')
+    description: "Table used for tracking appointments dates."
+
+    entities: 
+      - name: date
+        type: primary
+        expr: date_key
+
+    dimensions: 
+      - name: date_appt
+        type: categorical
+        expr: appointment_date
+      - name: appt_day
+        type: categorical
+        expr: day
+      - name: appt_week
+        type: categorical
+        expr: week
+      - name: appt_month
+        type: categorical 
+        expr: month
+      - name: appt_year
+        type: categorical
+        expr: year 
+      - name: appt_quarter
+        type: categorical 
+        expr: quarter 
