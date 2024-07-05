@@ -25,18 +25,18 @@ metrics:
         join_to_timespine: true 
 
 
-#==============#
-# RATIO METRIC #
-#==============#
+#================#
+# DERIVED METRIC #
+#================#
 
-#RATIO METRIC TO CALCULATE CHURN RATE
+#DERIVED METRIC TO CALCULATE CHURN RATE
 
   - name: churn_rate
-    label: Cases per Truck
-    type: ratio
+    label: churn rate
+    type: derived
     description: Metric to compute churn_rate.
     type_params:
-      numerator:
-        name: total_churn_patient
-      denominator: 
-        name: total_count_patient
+      expr: (total_churn_patient/total_count_patient)*100
+      metrics:
+        - name: total_churn_patient
+        - name: total_count_patient
