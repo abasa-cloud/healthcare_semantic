@@ -5,10 +5,10 @@ semantic_models:
   - name: patient_appt
     model: ref('fct_patient')
     description: "This table is used for all Appointment reporting related process."
-    primary_entity: patient_appt_primary_key #Required. 
+   # primary_entity: patient_id #Required. 
 
     defaults:
-      agg_time_dimension: appointment_date
+      agg_time_dimension: full_date
 
     entities: 
       #- name: patient_appt_primary_key
@@ -16,18 +16,18 @@ semantic_models:
       #  description: Required
       #  expr: patient_appt_primary_key
 
-      - name: appt_id # Unique identifier for the appointment
-        type: foreign
-        expr: appointment_id 
+      - name: patient_id # Unique identifier for the appointment
+        type: primary
+        expr: patient_id 
 
       - name: date
         type: foreign
-        expr: date_key #Created during transfromation after ingestion. 
+        expr: dim_date_key #Created during transfromation after ingestion. 
 
     dimensions: 
-      - name: appointment_date
+      - name: full_date
         type: time
-        label: "Date of Appointment"
+        label: "Reference Date -testing-"
         type_params:
           time_granularity: day
 
@@ -48,7 +48,7 @@ semantic_models:
 # Semantic for date table #
 #-------------------------#
   - name: date
-    model: ref('dim_date_appt')
+    model: ref('dim_date_table')
     description: "Table used for tracking appointments dates."
 
     entities: 
@@ -57,21 +57,28 @@ semantic_models:
         expr: date_key
 
     dimensions: 
-      - name: date_appt
+      - name: dim_date_key
         type: categorical
-        expr: appointment_date
-      - name: appt_day
-        type: categorical
-        expr: day
-      - name: appt_week
-        type: categorical
-        expr: week
-      - name: appt_month
+        expr: dim_date_key
+      - name: dim_full_date
         type: categorical 
+        expr: full_date
+      - name: dim_year
+        type: categorical 
+        expr: year
+      - name: dim_month
+        type: categorical
         expr: month
-      - name: appt_year
-        type: categorical
-        expr: year 
-      - name: appt_quarter
+      - name: dim_day
         type: categorical 
-        expr: quarter 
+        expr: day
+      - name: dim_day_of_week
+        type: categorical 
+        expr: day_of_week
+      - name: dim_day_name
+        type: categorical 
+        expr: day_name
+      - name: dim_month_name
+        type: categorical
+        expr: month_name
+      
