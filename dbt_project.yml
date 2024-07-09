@@ -6,8 +6,11 @@ name: 'semantic_model'
 version: '1.0.0'
 config-version: 2
 
+dbt-cloud:
+    project-id: 70403103942203
+
 # This setting configures which "profile" dbt uses for this project.
-profile: 'snowflake_profile'
+profile: 'my-snowflake-db'
 
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be

@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: testing_package
+Version: 0.1
+Summary: Testing package
+Home-page: https://github.com/abasa-hkkd/healthcare_semantic.git
+Author: test-hkkd
+Author-email: test.hkkd@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Requires-Dist: dbt-core>=1.0.0
+Requires-Dist: dbt-snowflake>=1.0.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: numpy>=1.21.0
