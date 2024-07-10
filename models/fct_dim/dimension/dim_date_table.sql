@@ -5,7 +5,7 @@ WITH RECURSIVE daterange AS (
     UNION ALL
     SELECT 
         DATEADD(day, 1, full_date)
-    FROM {{ source('semantics', 'time_table') }}
+    FROM {{ source('semantics', 'corp_time_table') }}
     WHERE full_date < '2025-12-31'
 )
 SELECT 

@@ -2,7 +2,7 @@ semantic_models:
 #-------------------------#
 # Semantic for Fact table #
 #-------------------------#
-  - name: patient_appt
+  - name: patient_mtr
     model: ref('fct_patient')
     description: "This table is used for all Appointment reporting related process."
    # primary_entity: patient_id #Required. 
@@ -28,6 +28,12 @@ semantic_models:
       - name: full_date
         type: time
         label: "Reference Date -testing-"
+        type_params:
+          time_granularity: day
+
+      - name: termination_date
+        type: time
+        label: "Reference the termiantion date -testing-"
         type_params:
           time_granularity: day
 

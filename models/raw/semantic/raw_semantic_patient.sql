@@ -1,5 +1,5 @@
 with patient as (
-    select * 
+    select *
     from {{ source('semantics', 'patient_data') }}
 ), 
 
@@ -8,11 +8,17 @@ appt as (
     from {{ source('semantics', 'appt_data') }}
 ), 
 
+churn as (
+    select * 
+    from {{ source('semantics', 'churn_data') }}
+),
+
 final as (
-    select 
+    select distinct
         p.patient_id, 
         p.churn, 
-        p.start_date, 
+        p.start_date,
+        c.churn_date, 
         p.insurance_type,
         p.age,
         p.gender,
@@ -24,5 +30,8 @@ final as (
     from patient p 
     left join appt a
         on p.patient_id = a.patient_id
+    left join churn c 
+        on p.patient_id = c.patient_id 
 )
-select * from final 
+select *
+from final
