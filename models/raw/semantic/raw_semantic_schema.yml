@@ -8,6 +8,6 @@ sources:
       - name: patient_data
       - name: appt_data
       - name: churn_data
-      - name: time_table
+      - name: corp_time_table
       
       
