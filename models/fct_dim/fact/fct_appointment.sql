@@ -1,25 +1,26 @@
 with appt as (
     select *
-    from {{ source('semantics', 'appt_data') }}
-), 
+    from {{ ref('stg_appt') }}
+),
 
 patient as (
-    select * 
-    from {{ source('semantics', 'patient_data') }}
+    select *
+    from {{ ref('stg_patient') }}
 ), 
 
 fct_appt as (
     select 
-        a.patient_id,
+        to_number(to_char(a.appointment_date, 'YYYYMMDD')) as dim_appt_key,
         a.appointment_date,
         a.appointment_type,
-        p.churn,
-        p.start_date, 
+        a.doctor_id,
+        p.patient_id,
+        p.start_date,
         p.insurance_type,
         p.age,
-        p.gender, 
-        p.address, 
-        p.medical_history
+        p.gender,
+        p.address,
+        p.churn
     from appt a 
     left join patient p 
         on a.patient_id = p.patient_id

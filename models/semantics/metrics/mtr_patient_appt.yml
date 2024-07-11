@@ -22,7 +22,17 @@ metrics:
       measure:
         name: total_churn_patient
         fill_nulls_with: 0 
-        join_to_timespine: true 
+        join_to_timespine: true
+
+  - name: total_count_appt
+    description: "Total count of all appointments. Historical reporting"
+    type: simple
+    label: Total appointment count
+    type_params:
+      measure:
+        name: total_appt
+        fill_nulls_with: 0
+        join_to_timespine: true
 
 
 #================#

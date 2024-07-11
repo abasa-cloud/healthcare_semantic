@@ -5,6 +5,6 @@ with churn_date as (
         churn,
         start_date,
         churn_date as termination_date
-    from {{ ref('raw_semantic_patient') }}
+    from {{ ref('stg_patient') }}
 )
 select * from churn_date
