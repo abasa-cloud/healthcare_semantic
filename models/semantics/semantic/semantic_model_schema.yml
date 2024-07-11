@@ -1,14 +1,14 @@
 semantic_models:
-#-------------------------#
-# Semantic for Fact table #
-#-------------------------#
-  - name: patient_mtr
-    model: ref('fct_patient')
-    description: "This table is used for all Appointment reporting related process."
+#--------------------------#
+# Semantic for dim_patient #
+#--------------------------#
+  - name: patient_details
+    model: ref('dim_patient')
+    description: "This table is used for all reporting related process for patients."
    # primary_entity: patient_id #Required. 
 
     defaults:
-      agg_time_dimension: full_date
+      agg_time_dimension: start_date
 
     entities: 
       #- name: patient_appt_primary_key
@@ -16,26 +16,26 @@ semantic_models:
       #  description: Required
       #  expr: patient_appt_primary_key
 
-      - name: patient_id # Unique identifier for the appointment
+      - name: patient_id # Unique identifier for the patient
         type: primary
         expr: patient_id 
-
       - name: date
         type: foreign
         expr: dim_date_key #Created during transfromation after ingestion. 
 
     dimensions: 
-      - name: full_date
-        type: time
-        label: "Reference Date -testing-"
-        type_params:
-          time_granularity: day
-
       - name: termination_date
         type: time
         label: "Reference the termiantion date -testing-"
         type_params:
           time_granularity: day
+      - name: start_date
+        type: time
+        label: "Reference the date when patient aquired the insurance."
+        type_params:
+          time_granularity: day
+      - name: gender
+        type: categorical
 
     measures:
       - name: total_count_patient
@@ -43,29 +43,63 @@ semantic_models:
         description: "Count of total patients including churn patients."
         agg: count_distinct
         expr: patient_id
-        
       - name: total_churn_patient
         label: "Total count of patients that left."
         description: "Count of patients that churned."
         agg: count  # Ensure 'agg' is provided
         expr: case when churn = 'Yes' then patient_id else null end
+
+#------------------------------#
+# Semantic for fct_appointment #
+#------------------------------#
+  - name: appointment_details
+    model: ref('fct_appointment')
+    description: "This table is used for all reporting related process for patient's appointments."
+   # primary_entity: patient_id #Required. 
+
+    defaults:
+      agg_time_dimension: appointment_date
+
+    entities:
+      - name: appt_key
+        type: primary
+        expr: dim_appt_key
+      - name: ptn_id 
+        type: foreign
+        expr: patient_id 
+
+    dimensions:
+      - name: appointment_date
+        type: time
+        label: "Reference the date of when the appointment was scheduled along with futher details."
+        type_params:
+          time_granularity: day
+      - name: appointment_type
+        type: categorical
+      - name: insurance_type
+        type: categorical
+
+    measures:
+      - name: total_appt
+        label: "Total Count of appointments"
+        description: "Count of total appointments including for churn patients."
+        agg: count_distinct
+        expr: dim_date_key
+
  
 #-------------------------#
 # Semantic for date table #
 #-------------------------#
   - name: date
-    model: ref('dim_date_table')
+    model: ref('dim_corp_date')
     description: "Table used for tracking appointments dates."
 
     entities: 
-      - name: date
+      - name: date_key
         type: primary
-        expr: date_key
+        expr: dim_date_key
 
     dimensions: 
-      - name: dim_date_key
-        type: categorical
-        expr: dim_date_key
       - name: dim_full_date
         type: categorical 
         expr: full_date
