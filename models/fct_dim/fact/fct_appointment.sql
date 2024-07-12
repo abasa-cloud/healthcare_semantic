@@ -27,6 +27,6 @@ fct_appt as (
         --on a.patient_id = p.patient_id
 )
 select * from fct_appt 
-order by appointment_date desc
+
 
 
