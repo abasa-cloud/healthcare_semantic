@@ -10,7 +10,8 @@ patient as (
 
 fct_appt as (
     select 
-        to_number(to_char(a.appointment_date, 'YYYYMMDD')) as dim_appt_key,
+        distinct to_number(to_char(a.appointment_date, 'YYYYMMDD')) 
+            || '-' || p.patient_id as dim_appt_key,
         a.appointment_date,
         a.appointment_type,
         a.doctor_id,
@@ -22,7 +23,10 @@ fct_appt as (
         p.address,
         p.churn
     from appt a 
-    left join patient p 
-        on a.patient_id = p.patient_id
+    cross join patient p 
+        --on a.patient_id = p.patient_id
 )
-select * from fct_appt
+select * from fct_appt 
+order by appointment_date desc
+
+
