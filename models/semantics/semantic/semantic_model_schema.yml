@@ -84,7 +84,7 @@ semantic_models:
         label: "Total Count of appointments"
         description: "Count of total appointments including for churn patients."
         agg: count_distinct
-        expr: dim_date_key
+        expr: dim_appt_key
 
  
 #-------------------------#
