@@ -8,10 +8,16 @@ patient as (
     from {{ ref('stg_patient') }}
 ), 
 
+corp_date as (
+    select 
+        dim_date_key
+    from {{ ref('dim_corp_date') }}
+),
+
 fct_appt as (
     select 
-        distinct to_number(to_char(a.appointment_date, 'YYYYMMDD')) 
-            || '-' || p.patient_id as dim_appt_key,
+        a.appt_date_key,
+        c.dim_date_key,
         a.appointment_date,
         a.appointment_type,
         a.doctor_id,
@@ -22,11 +28,14 @@ fct_appt as (
         p.gender,
         p.address,
         p.churn
-    from appt a 
-    cross join patient p 
-        --on a.patient_id = p.patient_id
+    from stg_appt a 
+    left join stg_patient p 
+        on a.patient_id = p.patient_id
+    left join dim_corp_date c
+        on a.appt_date_key = c.dim_date_key   
 )
 select * from fct_appt 
+--order by appointment_date desc
 
 
 
