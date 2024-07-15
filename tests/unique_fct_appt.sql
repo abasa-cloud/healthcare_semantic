@@ -3,6 +3,6 @@ select
     patient_id,
     appointment_date,
     count(*)
-from {{ ref('fact_appointment') }}
+from {{ ref('fct_appointment') }}
 group by patient_id, appointment_date
 having count(*) > 1
