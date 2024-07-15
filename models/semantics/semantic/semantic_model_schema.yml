@@ -63,7 +63,7 @@ semantic_models:
     entities:
       - name: appt_key
         type: primary
-        expr: dim_appt_key
+        expr: appt_date_key
       - name: ptn_id 
         type: foreign
         expr: patient_id 
@@ -100,7 +100,7 @@ semantic_models:
         expr: dim_date_key
 
     dimensions: 
-      - name: dim_full_date
+      - name: transaction_date
         type: categorical 
         expr: full_date
       - name: dim_year
