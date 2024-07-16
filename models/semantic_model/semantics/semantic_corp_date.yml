@@ -1,0 +1,36 @@
+semantic_models:
+#-------------------------#
+# Semantic for date table #
+#-------------------------#
+  - name: date
+    model: ref('dim_corp_date')
+    description: "Table used for tracking appointments dates."
+
+    entities: 
+      - name: date_key
+        type: primary
+        expr: dim_date_key
+
+    dimensions: 
+      - name: transaction_date
+        type: categorical 
+        expr: full_date
+      - name: dim_year
+        type: categorical 
+        expr: year
+      - name: dim_month
+        type: categorical
+        expr: month
+      - name: dim_day
+        type: categorical 
+        expr: day
+      - name: dim_day_of_week
+        type: categorical 
+        expr: day_of_week
+      - name: dim_day_name
+        type: categorical 
+        expr: day_name
+      - name: dim_month_name
+        type: categorical
+        expr: month_name
+      

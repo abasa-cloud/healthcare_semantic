@@ -1,0 +1,34 @@
+semantic_models:
+  - name: appointment_details
+    model: ref('fct_appointment')
+    description: "This table is used for all reporting related process for patient's appointments."
+   # primary_entity: patient_id #Required. 
+
+    defaults:
+      agg_time_dimension: appointment_date
+
+    entities:
+      - name: appt_key
+        type: primary
+        expr: appt_date_key
+      - name: ptn_id 
+        type: foreign
+        expr: patient_id 
+
+    dimensions:
+      - name: appointment_date
+        type: time
+        label: "Reference the date of when the appointment was scheduled along with futher details."
+        type_params:
+          time_granularity: day
+      - name: appointment_type
+        type: categorical
+      - name: insurance_type
+        type: categorical
+
+    measures:
+      - name: total_appt
+        label: "Total Count of appointments"
+        description: "Count of total appointments including for churn patients."
+        agg: count_distinct
+        expr: appt_date_key
