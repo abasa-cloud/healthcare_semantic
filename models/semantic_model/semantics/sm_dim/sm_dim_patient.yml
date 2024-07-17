@@ -1,0 +1,60 @@
+ semantic_models:
+#--------------------------#
+# Semantic for dim_patient #
+#--------------------------#
+  - name: patient_details
+    model: ref('dim_patient')
+    description: "This table is used for all reporting related process for patients."
+   # primary_entity: patient_id #Required. 
+
+    defaults:
+      agg_time_dimension: start_date
+
+    entities: 
+      #- name: patient_appt_primary_key
+      #  type: primary
+      #  description: Required
+      #  expr: patient_appt_primary_key
+
+      - name: patient_id # Unique identifier for the patient
+        type: primary
+        expr: patient_id 
+        
+      - name: date_key
+        type: foreign
+        expr: dim_date_key #Created during transfromation after ingestion. 
+
+    dimensions: 
+      - name: termination_date
+        type: time
+        label: "Reference the termiantion date -testing-"
+        type_params:
+          time_granularity: day
+
+      - name: start_date
+        type: time
+        label: "Reference the date when patient aquired the insurance."
+        type_params:
+          time_granularity: day
+
+      - name: gender
+        type: categorical
+
+      - name: churn
+        type: categorical 
+
+      - name: age
+        type: categorical 
+
+    measures:
+      - name: total_count_patient
+        label: "Total Count of Patients"
+        description: "Count of total patients including churn patients."
+        agg: count_distinct
+        expr: patient_id
+
+      - name: total_churn_patient
+        label: "Total count of patients that left."
+        description: "Count of patients that churned."
+        agg: count  # Ensure 'agg' is provided
+        expr: case when churn = 'Yes' then patient_id else null end
