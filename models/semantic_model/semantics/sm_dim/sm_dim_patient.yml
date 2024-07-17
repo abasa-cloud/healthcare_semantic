@@ -20,7 +20,7 @@
         type: primary
         expr: patient_id 
         
-      - name: date
+      - name: date_key
         type: foreign
         expr: dim_date_key #Created during transfromation after ingestion. 
 
@@ -39,6 +39,12 @@
 
       - name: gender
         type: categorical
+
+      - name: churn
+        type: categorical 
+
+      - name: age
+        type: categorical 
 
     measures:
       - name: total_count_patient
