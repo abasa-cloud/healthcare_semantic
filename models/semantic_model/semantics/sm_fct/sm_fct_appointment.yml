@@ -11,6 +11,7 @@ semantic_models:
       - name: appt_key
         type: primary
         expr: appt_date_key
+
       - name: ptn_id 
         type: foreign
         expr: patient_id 
@@ -21,8 +22,10 @@ semantic_models:
         label: "Reference the date of when the appointment was scheduled along with futher details."
         type_params:
           time_granularity: day
+
       - name: appointment_type
         type: categorical
+        
       - name: insurance_type
         type: categorical
 
