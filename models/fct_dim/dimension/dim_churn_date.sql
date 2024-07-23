@@ -20,5 +20,5 @@ select
     patient_id, 
     date, 
     date_type
-from cte_unpivot
+from cte_unpivot 
 

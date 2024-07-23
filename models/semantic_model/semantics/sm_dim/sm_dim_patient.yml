@@ -25,7 +25,7 @@
         expr: dim_date_key #Created during transfromation after ingestion. 
 
     dimensions: 
-      - name: termination_date
+      - name: churn_date
         type: time
         label: "Reference the termiantion date -testing-"
         type_params:

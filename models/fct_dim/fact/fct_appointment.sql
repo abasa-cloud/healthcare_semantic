@@ -16,7 +16,7 @@ corp_date as (
 
 fct_appt as (
     select 
-        a.appt_date_key||substr( a.doctor_id , 1 , 5 ) as appt_key,
+        a.appt_date_key||substr( a.doctor_id , 1 , 5 ) as appt_date_key,
         c.dim_date_key,
         a.appointment_date,
         a.appointment_type,
