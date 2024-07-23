@@ -12,9 +12,9 @@ semantic_models:
         type: primary
         expr: appt_date_key
 
-      - name: ptn_id 
+      - name: date_key
         type: foreign
-        expr: patient_id 
+        expr: dim_date_key #key created from corp_time model.
 
     dimensions:
       - name: appointment_date
