@@ -19,3 +19,4 @@ SELECT
     MONTHNAME(full_date) AS month_name
 FROM 
     daterange
+    
