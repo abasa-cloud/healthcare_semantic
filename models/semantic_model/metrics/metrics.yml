@@ -1,0 +1,14 @@
+#============#
+# FCT METRIC #
+#============# 
+
+version: 2 
+
+metrics: 
+  - name: total_appointments
+    description: "Distinct count for all appointments."
+    type: simple
+    label: Total Count of Appointments
+    type_params:
+      measure:
+        name: total_count_appt

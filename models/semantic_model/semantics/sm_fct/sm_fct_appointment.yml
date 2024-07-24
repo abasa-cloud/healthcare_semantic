@@ -10,29 +10,25 @@ semantic_models:
     entities:
       - name: appt_key
         type: primary
-        expr: appt_date_key
+        expr: appt_date_key 
 
     dimensions:
       - name: appointment_date
         type: time
-        label: "Reference the date of when the appointment was scheduled along with futher details."
         type_params:
-          time_granularity: day
+          time_granularity: day 
 
       - name: dim_date_key
         type: time
+        label: "model created to filter by date depending on granularity needed"
         type_params:
           time_granularity: day
-
-      - name: appointment_type
-        type: categorical
-        
-      - name: insurance_type
+      
+      - name: gender
         type: categorical
 
     measures:
-      - name: total_appt
-        label: "Total Count of appointments"
-        description: "Count of total appointments including for churn patients."
-        agg: count_distinct
+      - name: total_count_appt
+        description: Distinct count of appointments. 
         expr: appt_date_key
+        agg: count_distinct
