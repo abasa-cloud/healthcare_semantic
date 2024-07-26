@@ -37,8 +37,16 @@ semantic_models:
       - name: gender
         type: categorical
 
+      - name: insurance_type
+        type: categorical
+      
+      - name: churn
+        type: categorical
+
     measures:
       - name: total_count_appt
         description: Distinct count of appointments. 
         expr: appt_date_key
-        agg: count_distinct
+        agg: count_distinct 
+
+      

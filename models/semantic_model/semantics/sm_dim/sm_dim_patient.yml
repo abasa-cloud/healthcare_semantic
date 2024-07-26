@@ -44,7 +44,10 @@
         type: categorical 
 
       - name: age
-        type: categorical 
+        type: categorical
+
+      - name: insurance_type
+        type: categorical
 
     measures:
       - name: total_count_patient
@@ -58,3 +61,5 @@
         description: "Count of patients that churned."
         agg: count  # Ensure 'agg' is provided
         expr: case when churn = 'Yes' then patient_id else null end
+
+      
