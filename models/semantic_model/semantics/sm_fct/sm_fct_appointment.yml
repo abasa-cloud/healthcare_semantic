@@ -10,7 +10,14 @@ semantic_models:
     entities:
       - name: appt_key
         type: primary
-        expr: appt_date_key 
+        expr: appt_date_key
+
+      - name: date_key
+        type: foreign
+        expr: dim_date_key 
+
+      - name: patient_id
+        type: foreign
 
     dimensions:
       - name: appointment_date
@@ -23,6 +30,9 @@ semantic_models:
         label: "model created to filter by date depending on granularity needed"
         type_params:
           time_granularity: day
+
+      - name: appointment_type
+        type: categorical
       
       - name: gender
         type: categorical

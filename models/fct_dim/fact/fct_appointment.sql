@@ -35,8 +35,6 @@ fct_appt as (
         on a.appt_date_key = c.dim_date_key   
 )
 select * from fct_appt 
---where appt_key like '20230121LE4GV'
---order by appointment_date desc
 
 
 

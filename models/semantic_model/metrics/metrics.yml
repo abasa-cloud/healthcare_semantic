@@ -11,4 +11,24 @@ metrics:
     label: Total Count of Appointments
     type_params:
       measure:
-        name: total_count_appt
+        name: total_count_appt 
+
+#============#
+# DIM METRIC #
+#============#
+
+  - name: total_patients_count
+    description: "Distinct Count of all Patients." 
+    type: simple 
+    label: Total patients count
+    type_params:
+      measure:
+        name: total_count_patient
+
+  - name: total_churn_patients
+    description: "Distinct Count of all churn Patients." 
+    type: simple 
+    label: Total patients who cancelled the service.
+    type_params:
+      measure:
+        name: total_churn_patient
