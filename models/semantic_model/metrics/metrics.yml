@@ -31,4 +31,5 @@ metrics:
     label: Total patients who cancelled the service.
     type_params:
       measure:
-        name: total_churn_patient
+        name: total_churn_patient 
+
