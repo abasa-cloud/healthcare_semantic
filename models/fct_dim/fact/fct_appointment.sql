@@ -35,6 +35,3 @@ fct_appt as (
         on a.appt_date_key = c.dim_date_key   
 )
 select * from fct_appt 
-
-
-
