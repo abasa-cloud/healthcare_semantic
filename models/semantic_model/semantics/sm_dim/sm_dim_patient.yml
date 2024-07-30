@@ -48,18 +48,3 @@
 
       - name: insurance_type
         type: categorical
-
-    measures:
-      - name: total_count_patient
-        label: "Total Count of Patients"
-        description: "Count of total patients including churn patients."
-        agg: count_distinct
-        expr: patient_id
-
-      - name: total_churn_patient
-        label: "Total count of patients that left."
-        description: "Count of patients that churned."
-        agg: count  # Ensure 'agg' is provided
-        expr: case when churn = 'Yes' then patient_id else null end
-
-      

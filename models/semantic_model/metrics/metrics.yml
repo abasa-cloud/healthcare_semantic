@@ -11,7 +11,18 @@ metrics:
     label: Total Count of Appointments
     type_params:
       measure:
-        name: total_count_appt 
+        name: total_count_appt
+
+  - name: cumulative_appointments
+    description: "Total count of appointments of last month"
+    type: cumulative 
+    label: Cumulative Appointments over time
+    type_params:
+      measure:
+        name: total_count_appt
+      cumulative_type_params:
+        grain_to_date: month
+
 
 #============#
 # DIM METRIC #
@@ -33,3 +44,29 @@ metrics:
       measure:
         name: total_churn_patient 
 
+  - name: total_patients_over_last_month
+    description: "Test"
+    type: cumulative 
+    label: test
+    type_params:
+      measure:
+        name: total_count_patient
+        join_to_timespine: true
+      cumulative_type_params:
+        grain_to_date: month
+
+#================#
+# DERIVED METRIC #
+#================#
+
+  - name: churn_rate
+    description: CHURN rate
+    type: derived
+    label: total churn rate
+    type_params:
+      expr: (churn/total_ptn)*100
+      metrics:
+        - name: total_churn_patients
+          alias: churn
+        - name: total_patients_count
+          alias: total_ptn
