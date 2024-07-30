@@ -25,12 +25,6 @@ semantic_models:
         type_params:
           time_granularity: day 
 
-      - name: dim_date_key
-        type: time
-        label: "model created to filter by date depending on granularity needed"
-        type_params:
-          time_granularity: day
-
       - name: appointment_type
         type: categorical
       
@@ -58,7 +52,7 @@ semantic_models:
       - name: total_churn_patient
         label: "Total count of patients that left."
         description: "Count of patients that churned."
-        agg: count  # Ensure 'agg' is provided
-        expr: case when churn = 'Yes' then patient_id else null end
+        agg: sum  # Ensure 'agg' is provided
+        expr: case when churn = 'Yes' then 1 else 0 end
 
       
