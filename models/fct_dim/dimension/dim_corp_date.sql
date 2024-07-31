@@ -1,22 +1,19 @@
---CREATE OR REPLACE TABLE time_table AS 
-WITH RECURSIVE daterange AS (
-    SELECT 
-        TO_DATE('2020-01-01') AS full_date
-    UNION ALL
-    SELECT 
-        DATEADD(day, 1, full_date)
-    FROM {{ source('semantics', 'corp_time_table') }}
-    WHERE full_date < '2025-12-31'
-)
-SELECT 
-    TO_NUMBER(TO_CHAR(full_date, 'YYYYMMDD')) AS dim_date_key,
+-- CREATE OR REPLACE TABLE time_table AS 
+with recursive
+    daterange as (
+        select to_date('2020-01-01') as full_date
+        union all
+        select dateadd(day, 1, full_date)
+        from {{ source('semantics', 'corp_time_table') }}
+        where full_date < to_date('2025-12-31')
+    )
+select
+    cast (to_char(full_date, 'YYYYMMDD') as date) as dim_date_key,
     full_date,
-    YEAR(full_date) AS year, 
-    MONTH(full_date) AS month, 
-    DAY(full_date) AS day, 
-    DAYOFWEEK(full_date) AS day_of_week,
-    DAYNAME(full_date) AS day_name, 
-    MONTHNAME(full_date) AS month_name
-FROM 
-    daterange
-    
+    year(full_date) as year,
+    month(full_date) as month,
+    day(full_date) as day,
+    dayofweek(full_date) as day_of_week,
+    dayname(full_date) as day_name,
+    monthname(full_date) as month_name
+from daterange

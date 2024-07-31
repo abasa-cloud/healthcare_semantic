@@ -12,6 +12,7 @@ with patient as (
         p.medical_history
     from {{ ref('stg_patient') }} p 
     left join {{ ref('dim_corp_date') }} d
-        on p.patient_id = d.patient_id 
+        on p.churn_date = d.dim_date_key
 )
 select * from patient
+
