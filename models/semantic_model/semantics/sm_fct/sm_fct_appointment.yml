@@ -2,7 +2,6 @@ semantic_models:
   - name: appointment_details
     model: ref('fct_appointment')
     description: "This table is used for all reporting related process for patient's appointments."
-   # primary_entity: patient_id #Required. 
 
     defaults:
       agg_time_dimension: appointment_date
@@ -39,22 +38,13 @@ semantic_models:
       - name: churn
         type: categorical
 
+      - name: specialty
+        type: categorical
+
     measures:
       - name: total_count_appt
         description: Distinct count of appointments. 
-        expr: appt_date_key
+        expr: appt_key
         agg: count_distinct
-
-      - name: total_count_patient
-        label: "Total Count of Patients"
-        description: "Count of total patients including churn patients."
-        agg: count_distinct
-        expr: patient_id
-
-      - name: total_churn_patient
-        label: "Total count of patients that left."
-        description: "Count of patients that churned."
-        agg: sum  # Ensure 'agg' is provided
-        expr: case when churn = 'Yes' then 1 else 0 end
 
       
