@@ -2,12 +2,13 @@ version: 2
 
 sources: 
   - name: semantics
-    database: hc_semantics
-    schema: hc_raw
+    database: sm_db
+    schema: sm_schema
     tables:
-      - name: patient_data
-      - name: appt_data
-      - name: churn_data
+      - name: patient_raw
+      - name: appt_raw
+      - name: doctor_raw
       - name: corp_time_table
+      - name: clinic_raw
       
       
