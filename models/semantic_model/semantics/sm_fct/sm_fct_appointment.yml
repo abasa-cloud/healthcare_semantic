@@ -54,8 +54,8 @@ semantic_models:
         agg: count_distinct 
       
       - name: churn_patients_region
-        label: "Total count of churn patients by region: Northeast"
-        description: "Count of patients that churned, by region {}"
+        label: "Total count of churn patients by region"
+        description: "Count of patients that churned, by region"
         agg: sum  # Ensure 'agg' is provided
         expr: case when churn_date is null then 1 else 0 end     
 

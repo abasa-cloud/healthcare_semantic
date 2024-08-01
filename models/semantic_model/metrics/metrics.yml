@@ -13,13 +13,15 @@ metrics:
       measure:
         name: total_count_appt
 
-  - name: churn_patients_by_region
-    description: "Total count of churn patients by region"
+  - name: churn_patients_by_insurance_type
+    description: "Total count of churn patients by insurance type"
     type: simple
-    label: Churn patients by Region
+    label: Churn patients by Insurance Type
     type_params:
       measure:
-        name: churn_patients_region
+        name: total_churn_patient
+    filter: | 
+      {{Dimension ('patient_id__insurance_type') }} = 'HMO'
 
 #============#
 # DIM METRIC #
