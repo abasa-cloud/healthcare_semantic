@@ -1,6 +1,6 @@
 with appt as (
     select *
-    from {{ ref('stg_appt') }}
+    from {{ ref('int_appt') }}
 ),
 
 patient as (
@@ -16,7 +16,8 @@ corp_date as (
 
 fct_appt as (
     select 
-        a.appt_date_key||substr( a.doctor_id , 1 , 5 ) as appt_date_key,
+        a.appt_key,
+        a.appt_date_key,
         c.dim_date_key,
         a.appointment_date,
         a.appointment_type,
@@ -28,10 +29,10 @@ fct_appt as (
         p.gender,
         p.address,
         p.churn
-    from stg_appt a 
-    left join stg_patient p 
+    from appt a 
+    left join patient p 
         on a.patient_id = p.patient_id
-    left join dim_corp_date c
+    left join corp_date c
         on a.appt_date_key = c.dim_date_key   
 )
 select * from fct_appt 
