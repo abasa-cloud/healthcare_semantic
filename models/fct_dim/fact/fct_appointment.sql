@@ -16,7 +16,12 @@ corp_date as (
 
 dr_data as (
     select *
-    from {{ ref('stg_doctor') }}
+    from {{ ref('dim_doctor') }}
+),
+
+clinic as (
+    select *
+    from {{ ref('stg_clinic') }}
 ),
 
 fct_appt as (
@@ -27,9 +32,14 @@ fct_appt as (
         a.appointment_date,
         a.appointment_type,
         a.doctor_id,
+        d.clinic_id,
+        d.city,
+        d.state,
+        d.region,
         d.specialty,
         p.patient_id,
         p.start_date,
+        p.churn_date,
         p.insurance_type,
         p.age,
         p.gender,
