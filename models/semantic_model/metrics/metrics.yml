@@ -13,17 +13,6 @@ metrics:
       measure:
         name: total_count_appt
 
-  - name: cumulative_appointments
-    description: "Total count of appointments of last month"
-    type: cumulative 
-    label: Cumulative Appointments over time
-    type_params:
-      measure:
-        name: total_count_appt
-      cumulative_type_params:
-        grain_to_date: month
-
-
 #============#
 # DIM METRIC #
 #============#
@@ -43,17 +32,6 @@ metrics:
     type_params:
       measure:
         name: total_churn_patient 
-
-  - name: total_patients_over_last_month
-    description: "Test"
-    type: cumulative 
-    label: test
-    type_params:
-      measure:
-        name: total_count_patient
-        join_to_timespine: true
-      cumulative_type_params:
-        grain_to_date: month
 
 #================#
 # DERIVED METRIC #
