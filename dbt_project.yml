@@ -7,7 +7,7 @@ version: '1.0.0'
 config-version: 2
 
 dbt-cloud:
-    project-id: 70403103944029
+    project-id: 376682
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'my-snowflake-db'

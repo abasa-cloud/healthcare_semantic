@@ -13,6 +13,14 @@ metrics:
       measure:
         name: total_count_appt
 
+  - name: churn_patients_by_region
+    description: "Total count of churn patients by region"
+    type: simple
+    label: Churn patients by Region
+    type_params:
+      measure:
+        name: churn_patients_region
+
 #============#
 # DIM METRIC #
 #============#
