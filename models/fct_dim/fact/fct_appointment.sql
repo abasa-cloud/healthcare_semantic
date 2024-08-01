@@ -14,6 +14,11 @@ corp_date as (
     from {{ ref('dim_corp_date') }}
 ),
 
+dr_data as (
+    select *
+    from {{ ref('stg_doctor') }}
+),
+
 fct_appt as (
     select 
         a.appt_key,
@@ -22,6 +27,7 @@ fct_appt as (
         a.appointment_date,
         a.appointment_type,
         a.doctor_id,
+        d.specialty,
         p.patient_id,
         p.start_date,
         p.insurance_type,
@@ -29,10 +35,13 @@ fct_appt as (
         p.gender,
         p.address,
         p.churn
+
     from appt a 
     left join patient p 
         on a.patient_id = p.patient_id
     left join corp_date c
-        on a.appt_date_key = c.dim_date_key   
+        on a.appt_date_key = c.dim_date_key
+    left join dr_data d 
+        on a.doctor_id = d.doctor_id
 )
 select * from fct_appt 
