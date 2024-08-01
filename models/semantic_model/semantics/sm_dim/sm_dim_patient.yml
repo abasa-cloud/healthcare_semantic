@@ -23,9 +23,6 @@
       - name: dim_date_key
         type: foreign #Created during transfromation after ingestion.
 
-      - name: appt_key
-        type: foreign
-
     dimensions: 
       - name: churn_date
         type: time
