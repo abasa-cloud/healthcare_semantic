@@ -21,7 +21,7 @@
         expr: patient_id 
         
       - name: dim_date_key
-        type: foreign #Created during transfromation after ingestion. 
+        type: foreign #Created during transfromation after ingestion.
 
     dimensions: 
       - name: churn_date

@@ -38,8 +38,6 @@ fct_appt as (
         d.region,
         d.specialty,
         p.patient_id,
-        p.start_date,
-        p.churn_date,
         p.insurance_type,
         p.age,
         p.gender,
