@@ -10,13 +10,15 @@ semantic_models:
     entities:
       - name: appt_key
         type: primary
-        expr: appt_date_key
 
       - name: date_key
         type: foreign
         expr: dim_date_key 
 
       - name: patient_id
+        type: foreign
+
+      - name: doctor_id
         type: foreign
 
     dimensions:
